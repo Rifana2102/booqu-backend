@@ -1,29 +1,19 @@
 package com.booqu.booqu_backend.service;
 
-import com.booqu.booqu_backend.entity.BookEntity;
-import com.booqu.booqu_backend.entity.MasterGenreEntity;
-import com.booqu.booqu_backend.entity.UserEntity;
-import com.booqu.booqu_backend.mapper.ResponseMapper;
-import com.booqu.booqu_backend.model.book.BookDetailResponse;
-import com.booqu.booqu_backend.model.book.BookLoanResponse;
-import com.booqu.booqu_backend.model.book.BooksResponse;
-import com.booqu.booqu_backend.repository.BookRepository;
-import com.booqu.booqu_backend.repository.TransactionRepository;
-import com.booqu.booqu_backend.repository.UserRepository;
-
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.booqu.booqu_backend.entity.UserEntity;
+import com.booqu.booqu_backend.mapper.ResponseMapper;
+import com.booqu.booqu_backend.model.book.BookDetailResponse;
+import com.booqu.booqu_backend.model.book.BooksResponse;
+import com.booqu.booqu_backend.repository.BookRepository;
+import com.booqu.booqu_backend.repository.UserRepository;
 
 
 @Service
@@ -41,7 +31,7 @@ public class BookService {
     public List<BooksResponse> getAllBooks(String authorCode, String genreCode, String keyword) {
         bookLoanMaintenanceService.processAllAutoReturnAndReservations();
 
-          String[] genreCodes = (genreCode == null || genreCode.isEmpty())
+        String[] genreCodes = (genreCode == null || genreCode.isEmpty())
         ? new String[] {}
         : genreCode.split(",");
 
