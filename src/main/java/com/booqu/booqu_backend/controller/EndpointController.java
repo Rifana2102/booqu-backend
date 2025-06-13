@@ -21,7 +21,7 @@ public class EndpointController {
     @GetMapping("/all-endpoints")
     public List<String> getAllEndpoints() {
         return requestMappingHandlerMapping.getHandlerMethods().keySet().stream()
-                 .flatMap(info -> info.getPatternValues().stream())
+                .flatMap(info -> info.getPatternValues().stream())
                 .distinct()
                 .sorted()
                 .toList();

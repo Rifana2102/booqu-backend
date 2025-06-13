@@ -28,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping(
-        path = "/login",        
+        path = "/login",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -36,7 +36,7 @@ public class AuthController {
         return ResponseEntity.ok(userService.login(loginRequest));
     }
 
-     @PostMapping(
+    @PostMapping(
         path = "/register",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
