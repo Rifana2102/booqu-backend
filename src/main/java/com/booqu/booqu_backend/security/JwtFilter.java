@@ -46,6 +46,13 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, 
                                     FilterChain filterChain) throws ServletException, IOException {
         
+        String path = request.getRequestURI();
+
+        // ✅ Skip JWT filter for public/static resources
+        if (path.startsWith("/uploads/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         String token = jwtUtil.getJwtFromRequest(request);
 
         try {

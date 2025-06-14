@@ -127,7 +127,7 @@ public class LoanService {
 
     @Transactional
     public BookLoanResponse returnLoanBookById(Long bookId, Authentication authentication) {
-         String username = authentication.getName();
+        String username = authentication.getName();
 
         // Step 1: Auto return and process reservations for all books system-wide
         bookLoanMaintenanceService.processAllAutoReturnAndReservations();
