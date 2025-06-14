@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaUserCircle, FaBell, FaBars, FaTimes } from 'react-icons/fa';
+import Sidebar from './Sidebar';
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -35,48 +36,13 @@ const Dashboard = () => {
     { genre: 'Psychology', image: '/buku/richard.jpg' },
     { genre: 'Drama', image: '/buku/the_fault.jpg' },
     { genre: 'Thriller', image: '/buku/gilian.jpg' },
-  ];
-  return (
+  ];  return (
     <div className="min-h-screen bg-white font-serif text-[#333]">
-      {/* Sidebar */}
-      <div className={`fixed left-0 top-0 h-full bg-[#77B5CD] text-gray-700 shadow-lg transition-all duration-300 z-50 ${
-        isSidebarOpen ? 'w-60' : 'w-0 overflow-hidden'
-      }`}>
-        <div className="bg-[#186B8B] text-white text-2xl font-bold p-4 text-center">Booqu</div>
-        
-        <nav className="space-y-0">
-          <div className="bg-[#4FA1C1] p-4 font-semibold border-b border-white/20 text-white">
-            Dashboard
-          </div>
-          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
-               onClick={() => alert('Navigasi ke On loan')}>
-            On loan
-          </div>
-          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
-               onClick={() => alert('Navigasi ke Discover')}>
-            Discover
-          </div>
-          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
-               onClick={() => alert('Navigasi ke My Library')}>
-            My Library
-          </div>
-          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
-               onClick={() => alert('Navigasi ke Waiting List')}>
-            Reservasi
-          </div>
-          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
-               onClick={() => alert('Navigasi ke Setting')}>
-            Setting
-          </div>
-          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer transition-colors"
-               onClick={() => alert('Logout')}>
-            Log out
-          </div>
-        </nav>
-      </div>
+      {/* Sidebar Component */}
+      <Sidebar isOpen={isSidebarOpen} onToggle={toggleSidebar} />
 
       {/* Main Content */}
-      <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-60' : 'ml-0'}`}>        {/* Header */}
+      <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-60' : 'ml-0'}`}>{/* Header */}
         <div className="flex justify-between items-center p-4 border-b bg-white">
           <div className="flex items-center gap-4 w-full">
             {/* Hamburger Menu Button */}
