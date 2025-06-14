@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import DashboardGuest from "./components/DashboardGuest";
 import Dashboard from "./components/Dashboard";
-
+import MyLibrary from "./components/MyLibrary"; // Tambahkan ini
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard-guest" element={<DashboardGuest />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/library" element={<MyLibrary />} /> {/* Ini route MyLibrary */}
       </Routes>
     </BrowserRouter>
   );

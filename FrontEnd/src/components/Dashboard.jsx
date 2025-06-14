@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaUserCircle, FaBell, FaBars, FaTimes } from 'react-icons/fa';
+import Footer from "./Footer";
 import Sidebar from './Sidebar';
 
 const Dashboard = () => {
@@ -18,7 +19,7 @@ const Dashboard = () => {
     { title: 'Lord of the Rings', author: 'J.R.R. Tolkien', image: '/buku/richard.jpg' },
     { title: 'A Fault in Our Stars', author: 'John Green', image: '/buku/the_fault.jpg' },
   ];
-  
+
   const bukuTerfavorit = [
     { title: 'It Ends With Us', author: 'Colleen Hoover', image: '/buku/it_end.jpg' },
     { title: 'Atomic Habits', author: 'James Clear', image: '/buku/atomic.jpg' },
@@ -36,7 +37,7 @@ const Dashboard = () => {
     { genre: 'Psychology', image: '/buku/richard.jpg' },
     { genre: 'Drama', image: '/buku/the_fault.jpg' },
     { genre: 'Thriller', image: '/buku/gilian.jpg' },
-  ];  return (
+  ]; return (
     <div className="min-h-screen bg-white font-serif text-[#333]">
       {/* Sidebar Component */}
       <Sidebar isOpen={isSidebarOpen} onToggle={toggleSidebar} />
@@ -46,13 +47,13 @@ const Dashboard = () => {
         <div className="flex justify-between items-center p-4 border-b bg-white">
           <div className="flex items-center gap-4 w-full">
             {/* Hamburger Menu Button */}
-            <button 
+            <button
               onClick={toggleSidebar}
               className="text-2xl text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-100 transition-colors"
             >
               {isSidebarOpen ? <FaTimes /> : <FaBars />}
             </button>
-            
+
             <div className="flex-grow flex items-center border border-gray-400 rounded-full px-4 py-2 bg-white shadow-sm">
               <FaSearch className="text-gray-500 mr-3" />
               <input
@@ -62,10 +63,10 @@ const Dashboard = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <FaBell className="text-xl text-gray-600 cursor-pointer hover:text-gray-800 transition-colors" 
-                     onClick={() => alert('Notifikasi')} />
+              <FaBell className="text-xl text-gray-600 cursor-pointer hover:text-gray-800 transition-colors"
+                onClick={() => alert('Notifikasi')} />
               <FaUserCircle className="text-3xl text-gray-600 cursor-pointer hover:text-gray-800 transition-colors"
-                           onClick={() => alert('Profil User')} />
+                onClick={() => alert('Profil User')} />
             </div>
           </div>
         </div>        {/* Your Pocket Library Section */}
@@ -75,32 +76,32 @@ const Dashboard = () => {
             {/* Book stack - positioned like in the image */}
             <div className="relative w-64 h-40">
               {/* Back book */}
-              <img src="/buku/richard.jpg" alt="The Selfish Gene" 
-                   className="absolute top-2 left-8 w-28 h-40 object-cover shadow-lg transform rotate-12 z-10 cursor-pointer hover:scale-105 transition-transform" 
-                   onClick={() => alert('Klik buku: The Selfish Gene')} />
+              <img src="/buku/richard.jpg" alt="The Selfish Gene"
+                className="absolute top-2 left-8 w-28 h-40 object-cover shadow-lg transform rotate-12 z-10 cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => alert('Klik buku: The Selfish Gene')} />
               {/* Middle book */}
-              <img src="/buku/it_end.jpg" alt="It Ends With Us" 
-                   className="absolute top-0 left-0 w-28 h-40 object-cover shadow-xl transform -rotate-6 z-20 cursor-pointer hover:scale-105 transition-transform" 
-                   onClick={() => alert('Klik buku: It Ends With Us')} />
+              <img src="/buku/it_end.jpg" alt="It Ends With Us"
+                className="absolute top-0 left-0 w-28 h-40 object-cover shadow-xl transform -rotate-6 z-20 cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => alert('Klik buku: It Ends With Us')} />
               {/* Front book */}
-              <img src="/buku/money.jpg" alt="Psychology of Money" 
-                   className="absolute top-4 left-16 w-28 h-40 object-cover shadow-2xl transform rotate-3 z-30 cursor-pointer hover:scale-105 transition-transform" 
-                   onClick={() => alert('Klik buku: Psychology of Money')} />
+              <img src="/buku/money.jpg" alt="Psychology of Money"
+                className="absolute top-4 left-16 w-28 h-40 object-cover shadow-2xl transform rotate-3 z-30 cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => alert('Klik buku: Psychology of Money')} />
             </div>
           </div>
-          
+
           {/* Center/Right side with text content */}
           <div className="flex-grow text-center pr-8">
             <p className="text-lg tracking-wider text-gray-600 mb-4 font-normal uppercase cursor-pointer hover:text-gray-800 transition-colors"
-               onClick={() => alert('Klik YOUR POCKET LIBRARY')}>
+              onClick={() => alert('Klik YOUR POCKET LIBRARY')}>
               YOUR POCKET LIBRARY
             </p>
             <h1 className="text-6xl font-bold text-white font-serif leading-tight cursor-pointer hover:text-gray-100 transition-colors"
-                onClick={() => alert('Klik Pinjam Buku, Gampang!')}>
+              onClick={() => alert('Klik Pinjam Buku, Gampang!')}>
               Pinjam Buku, Gampang!
             </h1>
           </div>
-          
+
           {/* Floating decorative elements */}
           <div className="absolute top-8 left-40 w-2 h-2 bg-white/40 rounded-full"></div>
           <div className="absolute bottom-12 right-32 w-3 h-3 bg-white/30 rounded-full"></div>
@@ -117,7 +118,7 @@ const Dashboard = () => {
                 <span className="hover:text-gray-700 cursor-pointer">Psychology</span>
               </div>
             </div>
-            
+
             {/* Book covers in horizontal row */}
             <div className="flex justify-center gap-6 overflow-x-auto pb-4">
               <img src="/buku/money.jpg" alt="Psychology of Money" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
@@ -179,6 +180,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
