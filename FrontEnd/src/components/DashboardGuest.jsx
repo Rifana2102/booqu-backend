@@ -86,33 +86,34 @@ const DashboardGuest = () => {
         </div>
       </div>
 
-      {/* Book Category Section */}
-      <div className="bg-[#DDECF2] px-8 pt-6 pb-4">
-        <div className="bg-white rounded-lg shadow p-6">
+      {/* Book Category Section - 6 Buku dalam Satu Baris */}
+      <div className="bg-[#DDECF2] px-8 pt-6 pb-6">
+        <div className="bg-white rounded-lg shadow p-8 overflow-hidden">
           <div className="text-center mb-8">
-            <h3 className="text-2xl mb-4 font-bold font-serif">Book Category</h3>
-            <div className="flex flex-wrap justify-center gap-6 text-gray-500 text-lg font-serif">
-              {categories.map((cat, index) => (
-                <span key={index} className="cursor-pointer" onClick={() => alert(`Klik kategori: ${cat.genre}`)}>
-                  {cat.genre}
+            <h3 className="text-3xl font-bold font-serif mb-4 text-gray-800">Book category</h3>
+            <div className="flex justify-center gap-12 text-gray-600 text-xl font-serif mb-6">
+              {['Crime', 'Romance', 'Science', 'Psychology'].map((genre, idx) => (
+                <span key={idx} className="cursor-pointer hover:text-gray-800">
+                  {genre}
                 </span>
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {categories.map((cat, idx) => (
-              <div key={idx} className="flex justify-center">
-                <img
-                  src={cat.image}
-                  alt={cat.genre}
-                  className="w-20 h-28 object-cover rounded-md cursor-pointer"
-                  onClick={() => alert(`Klik gambar kategori: ${cat.genre}`)}
-                />
-              </div>
-            ))}
+
+          {/* Grid: 6 Buku per Baris */}
+          <div className="grid grid-cols-6 gap-8 justify-items-center">
+            <img src="/buku/money.jpg" alt="Psychology of Money" className="w-28 h-40 object-cover rounded-lg shadow-md" />
+            <img src="/buku/it_end.jpg" alt="It Ends With Us" className="w-28 h-40 object-cover rounded-lg shadow-md" />
+            <img src="/buku/a_brief.jpg" alt="A Brief History" className="w-28 h-40 object-cover rounded-lg shadow-md" />
+            <img src="/buku/a_good_girl.jpg" alt="A Good Girl's Guide" className="w-28 h-40 object-cover rounded-lg shadow-md" />
+            <img src="/buku/atomic.jpg" alt="Atomic Habits" className="w-28 h-40 object-cover rounded-lg shadow-md" />
+            <img src="/buku/richard.jpg" alt="The Selfish Gene" className="w-28 h-40 object-cover rounded-lg shadow-md" />
           </div>
         </div>
       </div>
+
+
+
 
       {/* Buku Terbaru, Favorit, Penulis Favorit */}
       <div className="bg-[#DDECF2] px-8 pt-4 pb-10">
