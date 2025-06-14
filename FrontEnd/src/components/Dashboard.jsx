@@ -62,7 +62,7 @@ const Dashboard = () => {
           </div>
           <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
                onClick={() => alert('Navigasi ke Waiting List')}>
-            Waiting List
+            Reservasi
           </div>
           <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
                onClick={() => alert('Navigasi ke Setting')}>
