@@ -28,15 +28,16 @@ const DashboardGuest = () => {
     { genre: 'Romance', image: '/buku/a_good_girl.jpg' },
     { genre: 'Science', image: '/buku/atomic.jpg' },
     { genre: 'Psychology', image: '/buku/richard.jpg' },
-    { genre: 'Drama', image: '/buku/the_fault.jpg' },
-    { genre: 'Thriller', image: '/buku/gilian.jpg' },
+    { genre: 'Fantasy', image: '/buku/the_fault.jpg' },
+    { genre: 'Horror', image: '/buku/gilian.jpg' },
   ];
 
   return (
     <div className="min-h-screen bg-white font-serif text-[#333]">
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b bg-white">
-        <div className="bg-[#406784] text-white px-6 py-2 rounded-br-3xl text-3xl font-bold">
+        <div className="bg-[#406784] text-white px-6 py-2 rounded-br-3xl text-3xl font-bold cursor-pointer"
+          onClick={() => alert('Klik Booqu')}>
           Booqu
         </div>
         <div className="flex items-center gap-4 w-full pl-6">
@@ -48,7 +49,7 @@ const DashboardGuest = () => {
               className="outline-none text-lg w-full bg-transparent text-gray-700 font-serif"
             />
           </div>
-          <FaUserCircle className="text-3xl text-gray-600" />
+          <FaUserCircle className="text-3xl text-gray-600 cursor-pointer" onClick={() => alert("Klik profil")} />
         </div>
       </div>
 
@@ -64,9 +65,24 @@ const DashboardGuest = () => {
           </p>
         </div>
         <div className="relative h-64 w-[340px]">
-          <img src={top3Books[2].image} className="absolute top-6 right-4 w-28 shadow-lg rotate-3" alt="3" />
-          <img src={top3Books[1].image} className="absolute top-3 right-20 w-28 shadow-lg -rotate-2" alt="2" />
-          <img src={top3Books[0].image} className="absolute top-0 right-36 w-32 z-10 shadow-2xl" alt="1" />
+          <img
+            src={top3Books[2].image}
+            className="absolute top-6 right-4 w-28 shadow-lg rotate-3 cursor-pointer"
+            alt="3"
+            onClick={() => alert(`Klik buku: ${top3Books[2].title}`)}
+          />
+          <img
+            src={top3Books[1].image}
+            className="absolute top-3 right-20 w-28 shadow-lg -rotate-2 cursor-pointer"
+            alt="2"
+            onClick={() => alert(`Klik buku: ${top3Books[1].title}`)}
+          />
+          <img
+            src={top3Books[0].image}
+            className="absolute top-0 right-36 w-32 z-10 shadow-2xl cursor-pointer"
+            alt="1"
+            onClick={() => alert(`Klik buku: ${top3Books[0].title}`)}
+          />
         </div>
       </div>
 
@@ -77,7 +93,9 @@ const DashboardGuest = () => {
             <h3 className="text-2xl mb-4 font-bold font-serif">Book Category</h3>
             <div className="flex flex-wrap justify-center gap-6 text-gray-500 text-lg font-serif">
               {categories.map((cat, index) => (
-                <span key={index}>{cat.genre}</span>
+                <span key={index} className="cursor-pointer" onClick={() => alert(`Klik kategori: ${cat.genre}`)}>
+                  {cat.genre}
+                </span>
               ))}
             </div>
           </div>
@@ -87,7 +105,8 @@ const DashboardGuest = () => {
                 <img
                   src={cat.image}
                   alt={cat.genre}
-                  className="w-20 h-28 object-cover rounded-md"
+                  className="w-20 h-28 object-cover rounded-md cursor-pointer"
+                  onClick={() => alert(`Klik gambar kategori: ${cat.genre}`)}
                 />
               </div>
             ))}
@@ -98,47 +117,25 @@ const DashboardGuest = () => {
       {/* Buku Terbaru, Favorit, Penulis Favorit */}
       <div className="bg-[#DDECF2] px-8 pt-4 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Buku Terbaru */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">Buku Terbaru</h4>
-            {bukuTerbaru.map((book, i) => (
-              <div key={i} className="flex gap-3 items-center mb-3">
-                <img src={book.image} alt={book.title} className="w-14 h-20 object-cover rounded" />
-                <div className="text-sm font-serif">
-                  <p className="font-bold">{book.title}</p>
-                  <p className="text-gray-600 italic">{book.author}</p>
+          {[{ title: "Buku Terbaru", data: bukuTerbaru }, { title: "Buku Terfavorit", data: bukuFavorit }, { title: "Penulis Favorit", data: penulisFavorit }].map((section, sIdx) => (
+            <div key={sIdx} className="bg-white p-4 rounded-lg shadow">
+              <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">{section.title}</h4>
+              {section.data.map((book, i) => (
+                <div key={i} className="flex gap-3 items-center mb-3">
+                  <img
+                    src={book.image}
+                    alt={book.title}
+                    className="w-14 h-20 object-cover rounded cursor-pointer"
+                    onClick={() => alert(`Klik gambar: ${book.title}`)}
+                  />
+                  <div className="text-sm font-serif">
+                    <p className="font-bold cursor-pointer" onClick={() => alert(`Klik judul: ${book.title}`)}>{book.title}</p>
+                    <p className="text-gray-600 italic cursor-pointer" onClick={() => alert(`Klik penulis: ${book.author}`)}>{book.author}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Buku Terfavorit */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">Buku Terfavorit</h4>
-            {bukuFavorit.map((book, i) => (
-              <div key={i} className="flex gap-3 items-center mb-3">
-                <img src={book.image} alt={book.title} className="w-14 h-20 object-cover rounded" />
-                <div className="text-sm font-serif">
-                  <p className="font-bold">{book.title}</p>
-                  <p className="text-gray-600 italic">{book.author}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Penulis Favorit */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">Penulis Favorit</h4>
-            {penulisFavorit.map((book, i) => (
-              <div key={i} className="flex gap-3 items-center mb-3">
-                <img src={book.image} alt={book.title} className="w-14 h-20 object-cover rounded" />
-                <div className="text-sm font-serif">
-                  <p className="font-bold">{book.title}</p>
-                  <p className="text-gray-600 italic">{book.author}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ function OnBoarding() {
         <button className="onboard-btn" onClick={() => navigate("/login")}>
           Masuk
         </button>
-        <button className="onboard-btn-outline">
+        <button className="onboard-btn-outline" onClick={() => navigate("/dashboard")}>
           Masuk sebagai tamu
         </button>
       </div>

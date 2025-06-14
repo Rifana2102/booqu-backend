@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import OnBoarding from "./components/OnBoarding";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import DashboardGuest from "./components/DashboardGuest"; // ✅ Tambahkan ini
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Route path="/" element={<OnBoarding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<DashboardGuest />} /> {/* Tambahkan ini */}
+        <Route path="/dashboard" element={<DashboardGuest />} />
       </Routes>
     </BrowserRouter>
   );

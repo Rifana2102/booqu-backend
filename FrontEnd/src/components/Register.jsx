@@ -28,7 +28,7 @@ function Register() {
       }
     } catch (error) {
       console.error("Network error:", error);
-      alert("Terjadi kesalahan koneksi. Pastikan backend berjalan di port 6060.");
+      alert("Terjadi kesalahan koneksi. Pastikan backend berjalan di port 8080.");
     }
   };
 
