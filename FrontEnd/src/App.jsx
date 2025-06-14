@@ -3,19 +3,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import OnBoarding from "./components/OnBoarding";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import DashboardGuest from "./components/DashboardGuest";
 import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <BrowserRouter>      <Routes>
+    <BrowserRouter>
+      <Routes>
         <Route path="/" element={<OnBoarding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-<<<<<<< HEAD
+        <Route path="/dashboard-guest" element={<DashboardGuest />} />
         <Route path="/dashboard" element={<Dashboard />} />
-=======
-        <Route path="/dashboard" element={<DashboardGuest />} /> {/* Tambahkan ini */}
->>>>>>> 65b692f5d57541a5072be262bfc58333ba344d2e
       </Routes>
     </BrowserRouter>
   );

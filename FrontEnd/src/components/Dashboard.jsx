@@ -1,203 +1,212 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/Dashboard.css";
+import React, { useState } from 'react';
+import { FaSearch, FaUserCircle, FaBell, FaBars, FaTimes } from 'react-icons/fa';
 
-function Dashboard() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentUser, setCurrentUser] = useState("Non Guest");
-  const [selectedCategory, setSelectedCategory] = useState("Crime");
-  const navigate = useNavigate();
+const Dashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Cek apakah user sudah login
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (!userData) {
-      navigate('/login');
-    } else {
-      try {
-        const user = JSON.parse(userData);
-        setCurrentUser(user.username || "Non Guest");
-      } catch (error) {
-        console.error("Error parsing user data:", error);
-        navigate('/login');
-      }
-    }
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
-
-  // Data buku untuk grid - 8 buku sesuai gambar
-  const allBooks = [
-    { id: 1, image: "1GG.jpg", alt: "Book 1" },
-    { id: 2, image: "2IEWS.jpg", alt: "Book 2" },
-    { id: 3, image: "3TFIOS.jpg", alt: "Book 3" },
-    { id: 4, image: "4TPOM.jpg", alt: "Book 4" },
-    { id: 5, image: "5AH.jpg", alt: "Book 5" },
-    { id: 6, image: "6BHOT.jpg", alt: "Book 6" },
-    { id: 7, image: "7TSG.jpg", alt: "Book 7" },
-    { id: 8, image: "8AGGGTM.jpg", alt: "Book 8" }
+  const top3Books = [
+    { title: 'The Selfish Gene', author: 'Richard Dawkins', image: '/buku/richard.jpg' },
+    { title: 'It Ends With Us', author: 'Colleen Hoover', image: '/buku/it_end.jpg' },
+    { title: 'The Psychology of Money', author: 'Morgan Housel', image: '/buku/money.jpg' },
   ];
 
-  // Data untuk section bawah - sesuai gambar
   const onLoanBooks = [
-    { id: 1, image: "1GG.jpg", title: "" }
+    { title: 'Lord of the Rings', author: 'J.R.R. Tolkien', image: '/buku/richard.jpg' },
+    { title: 'A Fault in Our Stars', author: 'John Green', image: '/buku/the_fault.jpg' },
   ];
-
+  
   const bukuTerfavorit = [
-    { id: 1, image: "3TFIOS.jpg", title: "It" }
+    { title: 'It Ends With Us', author: 'Colleen Hoover', image: '/buku/it_end.jpg' },
+    { title: 'Atomic Habits', author: 'James Clear', image: '/buku/atomic.jpg' },
   ];
 
   const penulisFavorit = [
-    { id: 1, image: "7TSG.jpg", title: "" }
+    { title: 'The Selfish Gene', author: 'Richard Dawkins', image: '/buku/richard.jpg' },
+    { title: 'A Good Girl\'s Guide to Murder', author: 'Holly Jackson', image: '/buku/a_good_girl.jpg' },
   ];
 
-  const getImageUrl = (imageName) => {
-    return `http://localhost:6060/uploads/books/images/${imageName}`;
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
-
+  const categories = [
+    { genre: 'Crime', image: '/buku/a_brief.jpg' },
+    { genre: 'Romance', image: '/buku/a_good_girl.jpg' },
+    { genre: 'Science', image: '/buku/atomic.jpg' },
+    { genre: 'Psychology', image: '/buku/richard.jpg' },
+    { genre: 'Drama', image: '/buku/the_fault.jpg' },
+    { genre: 'Thriller', image: '/buku/gilian.jpg' },
+  ];
   return (
-    <div className="dashboard">
+    <div className="min-h-screen bg-white font-serif text-[#333]">
       {/* Sidebar */}
-      <div className="sidebar">
-        <div className="logo">Booqu</div>
-        <nav className="nav-menu">
-          <div className="nav-item active">
+      <div className={`fixed left-0 top-0 h-full bg-[#77B5CD] text-gray-700 shadow-lg transition-all duration-300 z-50 ${
+        isSidebarOpen ? 'w-60' : 'w-0 overflow-hidden'
+      }`}>
+        <div className="bg-[#186B8B] text-white text-2xl font-bold p-4 text-center">Booqu</div>
+        
+        <nav className="space-y-0">
+          <div className="bg-[#4FA1C1] p-4 font-semibold border-b border-white/20 text-white">
             Dashboard
           </div>
-          <div className="nav-item">
+          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
+               onClick={() => alert('Navigasi ke On loan')}>
             On loan
           </div>
-          <div className="nav-item">
+          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
+               onClick={() => alert('Navigasi ke Discover')}>
             Discover
           </div>
-          <div className="nav-item">
+          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
+               onClick={() => alert('Navigasi ke My Library')}>
             My Library
           </div>
-          <div className="nav-item">
+          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
+               onClick={() => alert('Navigasi ke Waiting List')}>
             Waiting List
           </div>
-          <div className="nav-item">
+          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer border-b border-white/20 transition-colors"
+               onClick={() => alert('Navigasi ke Setting')}>
             Setting
           </div>
-          <div className="nav-item logout" onClick={handleLogout}>
+          <div className="p-4 hover:bg-[#4FA1C1] hover:text-white cursor-pointer transition-colors"
+               onClick={() => alert('Logout')}>
             Log out
           </div>
         </nav>
       </div>
 
       {/* Main Content */}
-      <div className="main-content">
-        {/* Header */}
-        <div className="header">
-          <div className="search-container">
-            <span className="search-icon">🔍</span>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
-          </div>
-          <div className="user-info">
-            <span className="notification-icon">🔔</span>
-            <div className="user-avatar">
-              <span>Ise</span>
+      <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-60' : 'ml-0'}`}>        {/* Header */}
+        <div className="flex justify-between items-center p-4 border-b bg-white">
+          <div className="flex items-center gap-4 w-full">
+            {/* Hamburger Menu Button */}
+            <button 
+              onClick={toggleSidebar}
+              className="text-2xl text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              {isSidebarOpen ? <FaTimes /> : <FaBars />}
+            </button>
+            
+            <div className="flex-grow flex items-center border border-gray-400 rounded-full px-4 py-2 bg-white shadow-sm">
+              <FaSearch className="text-gray-500 mr-3" />
+              <input
+                type="text"
+                placeholder="Search books, authors, genres..."
+                className="outline-none text-lg w-full bg-transparent text-gray-700 font-serif"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <FaBell className="text-xl text-gray-600 cursor-pointer hover:text-gray-800 transition-colors" 
+                     onClick={() => alert('Notifikasi')} />
+              <FaUserCircle className="text-3xl text-gray-600 cursor-pointer hover:text-gray-800 transition-colors"
+                           onClick={() => alert('Profil User')} />
             </div>
           </div>
-        </div>
-
-        {/* Welcome Section */}
-        <div className="welcome-section">
-          <div className="welcome-content">
-            <div className="welcome-text">
-              <h1>YOUR POCKET LIBRARY</h1>
-              <h2>Pinjam Buku, Gampang!</h2>
+        </div>        {/* Your Pocket Library Section */}
+        <div className="bg-gradient-to-r from-[#B8E3F0] to-[#7DD3F0] px-8 py-16 flex items-center justify-between relative overflow-hidden">
+          {/* Left side with stacked books */}
+          <div className="relative flex-shrink-0 ml-8">
+            {/* Book stack - positioned like in the image */}
+            <div className="relative w-64 h-40">
+              {/* Back book */}
+              <img src="/buku/richard.jpg" alt="The Selfish Gene" 
+                   className="absolute top-2 left-8 w-28 h-40 object-cover shadow-lg transform rotate-12 z-10 cursor-pointer hover:scale-105 transition-transform" 
+                   onClick={() => alert('Klik buku: The Selfish Gene')} />
+              {/* Middle book */}
+              <img src="/buku/it_end.jpg" alt="It Ends With Us" 
+                   className="absolute top-0 left-0 w-28 h-40 object-cover shadow-xl transform -rotate-6 z-20 cursor-pointer hover:scale-105 transition-transform" 
+                   onClick={() => alert('Klik buku: It Ends With Us')} />
+              {/* Front book */}
+              <img src="/buku/money.jpg" alt="Psychology of Money" 
+                   className="absolute top-4 left-16 w-28 h-40 object-cover shadow-2xl transform rotate-3 z-30 cursor-pointer hover:scale-105 transition-transform" 
+                   onClick={() => alert('Klik buku: Psychology of Money')} />
             </div>
-            <div className="welcome-image">
-              <img src={getImageUrl("book-illustration.png")} alt="Book illustration" />
-            </div>
-          </div>
-        </div>
-
-        {/* Book Categories */}
-        <div className="categories-section">
-          <h3>Book category</h3>
-          <div className="category-tabs">
-            <button className="category-tab active">Crime</button>
-            <button className="category-tab">Romance</button>
-            <button className="category-tab">Science</button>
-            <button className="category-tab">Psychology</button>
           </div>
           
-          <div className="books-grid">
-            {allBooks.map(book => (
-              <div key={book.id} className="book-card">
-                <img 
-                  src={getImageUrl(book.image)} 
-                  alt={book.alt}
-                  className="book-cover"
-                />
+          {/* Center/Right side with text content */}
+          <div className="flex-grow text-center pr-8">
+            <p className="text-lg tracking-wider text-gray-600 mb-4 font-normal uppercase cursor-pointer hover:text-gray-800 transition-colors"
+               onClick={() => alert('Klik YOUR POCKET LIBRARY')}>
+              YOUR POCKET LIBRARY
+            </p>
+            <h1 className="text-6xl font-bold text-white font-serif leading-tight cursor-pointer hover:text-gray-100 transition-colors"
+                onClick={() => alert('Klik Pinjam Buku, Gampang!')}>
+              Pinjam Buku, Gampang!
+            </h1>
+          </div>
+          
+          {/* Floating decorative elements */}
+          <div className="absolute top-8 left-40 w-2 h-2 bg-white/40 rounded-full"></div>
+          <div className="absolute bottom-12 right-32 w-3 h-3 bg-white/30 rounded-full"></div>
+          <div className="absolute top-20 right-20 w-1.5 h-1.5 bg-yellow-300/70 rounded-full"></div>
+        </div>{/* Book Category Section */}
+        <div className="bg-[#DDECF2] px-8 pt-6 pb-4">
+          <div className="bg-white rounded-lg shadow p-8">
+            <div className="text-center mb-8">
+              <h3 className="text-3xl mb-6 font-bold font-serif text-gray-800">Book category</h3>
+              <div className="flex justify-center gap-12 text-gray-500 text-xl font-serif mb-8">
+                <span className="hover:text-gray-700 cursor-pointer">Crime</span>
+                <span className="hover:text-gray-700 cursor-pointer">Romance</span>
+                <span className="hover:text-gray-700 cursor-pointer">Science</span>
+                <span className="hover:text-gray-700 cursor-pointer">Psychology</span>
               </div>
-            ))}
+            </div>
+            
+            {/* Book covers in horizontal row */}
+            <div className="flex justify-center gap-6 overflow-x-auto pb-4">
+              <img src="/buku/money.jpg" alt="Psychology of Money" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/it_end.jpg" alt="It Ends With Us" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/a_brief.jpg" alt="A Brief History" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/a_good_girl.jpg" alt="A Good Girl's Guide" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/atomic.jpg" alt="Atomic Habits" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/richard.jpg" alt="The Selfish Gene" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/the_fault.jpg" alt="The Fault in Our Stars" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+              <img src="/buku/gilian.jpg" alt="Gone Girl" className="w-24 h-36 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" />
+            </div>
           </div>
         </div>
 
-        {/* Bottom Sections */}
-        <div className="bottom-sections">
-          {/* On Loan */}
-          <div className="section">
-            <h4>On loan</h4>
-            <div className="books-row">
-              {onLoanBooks.map(book => (
-                <div key={book.id} className="book-item">
-                  <img 
-                    src={getImageUrl(book.image)} 
-                    alt={book.title}
-                    className="book-thumbnail"
-                  />
-                  {book.title && <p className="book-title">{book.title}</p>}
+        {/* Bottom Section */}
+        <div className="bg-[#DDECF2] px-8 pt-4 pb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* On loan */}
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">On loan</h4>
+              {onLoanBooks.map((book, i) => (
+                <div key={i} className="flex gap-3 items-center mb-3">
+                  <img src={book.image} alt={book.title} className="w-14 h-20 object-cover rounded" />
+                  <div className="text-sm font-serif">
+                    <p className="font-bold">{book.title}</p>
+                    <p className="text-gray-600 italic">{book.author}</p>
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Buku Terfavorit */}
-          <div className="section">
-            <h4>Buku Terfavorit</h4>
-            <div className="books-row">
-              {bukuTerfavorit.map(book => (
-                <div key={book.id} className="book-item">
-                  <img 
-                    src={getImageUrl(book.image)} 
-                    alt={book.title}
-                    className="book-thumbnail"
-                  />
-                  {book.title && <p className="book-title">{book.title}</p>}
+            {/* Buku Terfavorit */}
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">Buku Terfavorit</h4>
+              {bukuTerfavorit.map((book, i) => (
+                <div key={i} className="flex gap-3 items-center mb-3">
+                  <img src={book.image} alt={book.title} className="w-14 h-20 object-cover rounded" />
+                  <div className="text-sm font-serif">
+                    <p className="font-bold">{book.title}</p>
+                    <p className="text-gray-600 italic">{book.author}</p>
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Penulis Favorit */}
-          <div className="section">
-            <h4>Penulis Favorit</h4>
-            <div className="books-row">
-              {penulisFavorit.map(book => (
-                <div key={book.id} className="book-item">
-                  <img 
-                    src={getImageUrl(book.image)} 
-                    alt={book.title}
-                    className="book-thumbnail"
-                  />
-                  {book.title && <p className="book-title">{book.title}</p>}
+            {/* Penulis Favorit */}
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h4 className="text-lg font-semibold border-b pb-2 mb-3 font-serif">Penulis Favorit</h4>
+              {penulisFavorit.map((book, i) => (
+                <div key={i} className="flex gap-3 items-center mb-3">
+                  <img src={book.image} alt={book.title} className="w-14 h-20 object-cover rounded" />
+                  <div className="text-sm font-serif">
+                    <p className="font-bold">{book.title}</p>
+                    <p className="text-gray-600 italic">{book.author}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -206,6 +215,6 @@ function Dashboard() {
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

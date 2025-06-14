@@ -6,15 +6,7 @@ import "../styles/Login.css";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-<<<<<<< HEAD
   const navigate = useNavigate();
-
-  // DUMMY DATA UNTUK TESTING DASHBOARD:
-  // Username: admin, Password: admin
-  // Username: user, Password: user
-  // Username: test, Password: test
-=======
->>>>>>> 65b692f5d57541a5072be262bfc58333ba344d2e
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,22 +45,21 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
-<<<<<<< HEAD
-      if (res.ok) {
-        const data = await res.json();
-        alert("Login berhasil!");
-        // Simpan token atau user data di localStorage
-        localStorage.setItem("user", JSON.stringify(data));
-        // Redirect ke dashboard
-        navigate("/dashboard");
-=======
 
       if (res.ok) {
         const data = await res.json();
         alert("Login berhasil!");
-        // Redirect atau simpan token jika diperlukan
-        console.log("Login response:", data);
->>>>>>> 65b692f5d57541a5072be262bfc58333ba344d2e
+        // Simpan user data dari API response
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            username: data.username || username,
+            name: data.name || username,
+            token: data.token || "api-token",
+          })
+        );
+        // Redirect ke dashboard
+        navigate("/dashboard");
       } else {
         const errorData = await res.json();
         console.error("Login error:", errorData);
@@ -82,6 +73,23 @@ function Login() {
       console.error("Network error:", error);
       alert("Terjadi kesalahan koneksi. Pastikan backend berjalan di port 6060.");
     }
+  };
+
+  // Fungsi untuk masuk sebagai tamu
+  const handleGuestLogin = () => {
+    // Simpan data guest di localStorage
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        username: "guest",
+        name: "Guest User",
+        token: "guest-token",
+        isGuest: true,
+      })
+    );
+    
+    // Redirect ke dashboard guest
+    navigate("/dashboard-guest");
   };
 
   return (
@@ -110,6 +118,7 @@ function Login() {
             Masuk
           </button>
         </form>
+        
         <div className="login-register-link">
           Belum punya akun? <Link to="/register">Daftar di sini</Link>
         </div>
