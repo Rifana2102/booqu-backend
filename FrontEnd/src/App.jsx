@@ -11,7 +11,11 @@ function App() {
         <Route path="/" element={<OnBoarding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+<<<<<<< HEAD
         <Route path="/dashboard" element={<Dashboard />} />
+=======
+        <Route path="/dashboard" element={<DashboardGuest />} /> {/* Tambahkan ini */}
+>>>>>>> 65b692f5d57541a5072be262bfc58333ba344d2e
       </Routes>
     </BrowserRouter>
   );

@@ -6,12 +6,15 @@ import "../styles/Login.css";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+<<<<<<< HEAD
   const navigate = useNavigate();
 
   // DUMMY DATA UNTUK TESTING DASHBOARD:
   // Username: admin, Password: admin
   // Username: user, Password: user
   // Username: test, Password: test
+=======
+>>>>>>> 65b692f5d57541a5072be262bfc58333ba344d2e
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +53,7 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
+<<<<<<< HEAD
       if (res.ok) {
         const data = await res.json();
         alert("Login berhasil!");
@@ -57,6 +61,14 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(data));
         // Redirect ke dashboard
         navigate("/dashboard");
+=======
+
+      if (res.ok) {
+        const data = await res.json();
+        alert("Login berhasil!");
+        // Redirect atau simpan token jika diperlukan
+        console.log("Login response:", data);
+>>>>>>> 65b692f5d57541a5072be262bfc58333ba344d2e
       } else {
         const errorData = await res.json();
         console.error("Login error:", errorData);
