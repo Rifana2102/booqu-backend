@@ -33,8 +33,8 @@ public class JwtFilter extends OncePerRequestFilter {
     private HandlerExceptionResolver exceptionResolver;
     
     public JwtFilter(JwtUtil jwtUtil,
-                     CustomUserDetailService userDetailService,
-                     @Qualifier("handlerExceptionResolver") HandlerExceptionResolver exceptionResolver) {
+                    CustomUserDetailService userDetailService,
+                    @Qualifier("handlerExceptionResolver") HandlerExceptionResolver exceptionResolver) {
         this.jwtUtil = jwtUtil;
         this.userDetailService = userDetailService;
         this.exceptionResolver = exceptionResolver;

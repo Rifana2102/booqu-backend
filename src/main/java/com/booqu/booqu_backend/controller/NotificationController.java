@@ -25,7 +25,7 @@ public class NotificationController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(
-        path = "/notification",    
+        path = "/notification",
         produces = MediaType.APPLICATION_JSON_VALUE
     )
     public WebResponse<List<NotificationResponse>> getNotification(Authentication authentication) {
@@ -36,6 +36,6 @@ public class NotificationController {
             .status(    true)
             .messages("Get Profile success")
             .data(response)
-            .build();      
+            .build();
     }
 }
