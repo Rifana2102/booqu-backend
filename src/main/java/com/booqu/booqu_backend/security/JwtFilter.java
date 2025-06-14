@@ -33,8 +33,8 @@ public class JwtFilter extends OncePerRequestFilter {
     private HandlerExceptionResolver exceptionResolver;
     
     public JwtFilter(JwtUtil jwtUtil,
-                    CustomUserDetailService userDetailService,
-                    @Qualifier("handlerExceptionResolver") HandlerExceptionResolver exceptionResolver) {
+                     CustomUserDetailService userDetailService,
+                     @Qualifier("handlerExceptionResolver") HandlerExceptionResolver exceptionResolver) {
         this.jwtUtil = jwtUtil;
         this.userDetailService = userDetailService;
         this.exceptionResolver = exceptionResolver;
@@ -46,13 +46,6 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, 
                                     FilterChain filterChain) throws ServletException, IOException {
         
-        String path = request.getRequestURI();
-
-        // ✅ Skip JWT filter for public/static resources
-        if (path.startsWith("/uploads/")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
         String token = jwtUtil.getJwtFromRequest(request);
 
         try {

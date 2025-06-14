@@ -9,4 +9,5 @@ import com.booqu.booqu_backend.entity.MasterGenreEntity;
 import com.booqu.booqu_backend.model.master.MasterResponse;
 
 @Repository
-public interface MasterGenresRepository extends JpaRepository<MasterGenreEntity, Long>{}
+public interface MasterGenreRepository extends JpaRepository<MasterGenreEntity, Long> {
+}

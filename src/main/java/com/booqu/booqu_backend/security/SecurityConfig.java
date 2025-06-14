@@ -32,6 +32,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/files/pdf/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/masters/genres").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/all-endpoints").permitAll()
@@ -42,7 +44,6 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/books/my-loans").authenticated() //
                 .requestMatchers(HttpMethod.GET, "/api/books/my-libraries").authenticated() //
                 .requestMatchers(HttpMethod.GET, "/api/books/my-reservations").authenticated() //
-                .requestMatchers(HttpMethod.GET, "/api/master/genres").permitAll()
                 .anyRequest().authenticated())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));

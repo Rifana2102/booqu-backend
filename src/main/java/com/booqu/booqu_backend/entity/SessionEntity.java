@@ -38,7 +38,7 @@ public class SessionEntity {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    private String createdBy;
+     private String createdBy;
     private String updatedBy;
     private String deletedBy;
     private Date deletedAt;

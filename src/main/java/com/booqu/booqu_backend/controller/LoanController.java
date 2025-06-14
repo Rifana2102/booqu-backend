@@ -34,7 +34,7 @@ public class LoanController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(
-        path = "/books/my-loans",
+        path = "/books/my-loans",    
         produces = MediaType.APPLICATION_JSON_VALUE
     )
     public WebResponse<List<BooksResponse>> getMyLoanBooks(Authentication authentication) {
@@ -45,7 +45,7 @@ public class LoanController {
                                         .status(    true)
                                         .messages("My Book Loan list fetching success")
                                         .data(response)
-                                        .build();
+                                        .build();      
     }
 
     @PreAuthorize("hasRole('USER')")

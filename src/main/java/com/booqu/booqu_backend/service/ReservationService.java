@@ -44,6 +44,7 @@ public class ReservationService {
     @Transactional
     public BookReservationResponse reserveBookById(Long bookId, Authentication authentication) {
         String username = authentication.getName();
+        String reservationStatus = "";
 
         // Step 0: Run global auto-return and reservation processing
         bookLoanMaintenanceService.processAllAutoReturnAndReservations();
@@ -102,6 +103,8 @@ public class ReservationService {
             .build();
         transactionRepository.save(reservedTransaction);
 
+        reservationStatus = reservedType.getCode();
+
         // Step 7: If stock available, directly loan the book
         if (bookStock.getBookAvailable() != null && bookStock.getBookAvailable() > 0) {
             LocalDate dueDate = LocalDate.now().plusDays(5);
@@ -140,12 +143,15 @@ public class ReservationService {
             bookStock.setUpdatedBy(username);
             bookStock.setUpdatedAt(now);
             bookStockRepository.save(bookStock);
+
+            reservationStatus = loanType.getCode();
         }
 
         return BookReservationResponse.builder()
             .bookTitle(book.getTitle())
             .AuthorName(book.getAuthor().getName())
             .ReservationDate(now)
+            .status(reservationStatus)
             .build();
     }
 

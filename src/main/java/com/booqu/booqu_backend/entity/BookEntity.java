@@ -29,6 +29,8 @@ public class BookEntity {
 
     private String imagePath;
     private String pdfPath;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @CreationTimestamp

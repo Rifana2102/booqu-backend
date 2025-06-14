@@ -18,4 +18,6 @@ public class BookReservationResponse {
     private String AuthorName;
 
     private Date ReservationDate;
+
+    private String status;
 }

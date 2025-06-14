@@ -2,6 +2,8 @@ package com.booqu.booqu_backend.service;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,15 @@ import com.booqu.booqu_backend.entity.BookEntity;
 import com.booqu.booqu_backend.entity.BookStockEntity;
 import com.booqu.booqu_backend.entity.LoanEntity;
 import com.booqu.booqu_backend.entity.MasterTransactionTypeEntity;
+import com.booqu.booqu_backend.entity.ReservationEntity;
 import com.booqu.booqu_backend.entity.TransactionEntity;
 import com.booqu.booqu_backend.entity.UserEntity;
+import com.booqu.booqu_backend.mapper.ResponseMapper;
 import com.booqu.booqu_backend.model.book.BookLoanResponse;
 import com.booqu.booqu_backend.repository.BookRepository;
 import com.booqu.booqu_backend.repository.BookStockRepository;
 import com.booqu.booqu_backend.repository.LoanRepository;
+import com.booqu.booqu_backend.repository.ReservationRepository;
 import com.booqu.booqu_backend.repository.TransactionRepository;
 import com.booqu.booqu_backend.repository.TransactionTypeRepository;
 import com.booqu.booqu_backend.repository.UserRepository;
@@ -122,12 +127,13 @@ public class LoanService {
             .authorName(book.getAuthor().getName())
             .loanDate(LocalDate.now())
             .dueDate(dueDate)
+            .status(transactionTypeLoan.getCode())
             .build();
     }
 
     @Transactional
     public BookLoanResponse returnLoanBookById(Long bookId, Authentication authentication) {
-        String username = authentication.getName();
+         String username = authentication.getName();
 
         // Step 1: Auto return and process reservations for all books system-wide
         bookLoanMaintenanceService.processAllAutoReturnAndReservations();
@@ -172,7 +178,7 @@ public class LoanService {
             .build();
         transactionRepository.save(transactionLoanEntity);
 
-        return BookLoanResponse.builder()
+         return BookLoanResponse.builder()
             .bookTitle(book.getTitle())
             .authorName(book.getAuthor().getName())
             .loanDate(activeLoan.getLoanDate())

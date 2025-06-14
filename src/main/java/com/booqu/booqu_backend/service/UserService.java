@@ -3,6 +3,7 @@ package com.booqu.booqu_backend.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,7 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.booqu.booqu_backend.entity.BookStockEntity;
 import com.booqu.booqu_backend.entity.MasterRoleEntity;
 import com.booqu.booqu_backend.entity.SessionEntity;
 import com.booqu.booqu_backend.entity.UserEntity;
@@ -92,9 +95,14 @@ public class UserService {
     }
 
     @Transactional
-    public WebResponse<RegisterResponse> registerUser(RegisterRequest request) {
-        if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
+    public RegisterResponse registerUser(RegisterRequest request) {
+
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }
+
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
 
         MasterRoleEntity userRole = roleRepository.findByCode("USER")
@@ -115,14 +123,10 @@ public class UserService {
 
         userRepository.save(user);
 
-        RegisterResponse responseData = new RegisterResponse(user.getEmail(), user.getUsername(), user.getName());
-
-        WebResponse<RegisterResponse> response = new WebResponse<>();
-        response.setStatus(true);
-        response.setMessages("User registered successfully!");
-        response.setErrors(null);
-        response.setData(responseData);
-
-        return response;
+        return RegisterResponse.builder()
+            .email(user.getEmail())
+            .username(user.getUsername())
+            .name(user.getName())
+            .build();
     }
 }

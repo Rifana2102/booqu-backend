@@ -23,4 +23,6 @@ public class BookLoanResponse {
     private LocalDate dueDate;
 
      private LocalDate returnDate;
+
+     private String status;
 }

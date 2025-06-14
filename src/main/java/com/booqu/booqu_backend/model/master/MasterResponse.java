@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MasterResponse {
     private Long id;
+
     private String code;
+
     private String name;
 }
